@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css//components.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        function CBR_XML_Daily_Ru(rates) {
+            function trend(current, previous) {
+                if (current > previous) return ' ▲';
+                if (current < previous) return ' ▼';
+                return '';
+            }
+
+            var USDrate = rates.Valute.USD.Value.toFixed(4).replace('.', ',');
+            var USD = document.getElementById('USD');
+            USD.innerHTML = USD.innerHTML.replace('00,0000', USDrate);
+            USD.innerHTML += trend(rates.Valute.USD.Value, rates.Valute.USD.Previous);
+
+            var EURrate = rates.Valute.EUR.Value.toFixed(4).replace('.', ',');
+            var EUR = document.getElementById('EUR');
+            EUR.innerHTML = EUR.innerHTML.replace('00,0000', EURrate);
+            EUR.innerHTML += trend(rates.Valute.EUR.Value, rates.Valute.EUR.Previous);
+        }
+    </script>
+
+
+    <link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/" />
+</head>
+
+
+
+<body class="body">
+    <h1 class="visually-hidden">Мои заказы</h1>
+
+    <header class="fake-header">
+        <div class="fake-header__wrapper"></div>
+    </header>
+
+    <main class="main">
+        конвертер
+
+
+        <div id="USD">Доллар США $ — 00,0000 руб.</div>
+        <div id="EUR">Евро € — 00,0000 руб.</div>
+
+
+        <div class="select-wrapper">
+            <div class="select-from">
+                <label class="curr-label-from">
+                    <input type="radio" class="input-radio-from" name="curr-from" curr-id="RUR" checked>
+                    <span class="curr-desc">RUR</span>
+                </label>
+
+                <label class="curr-label-from">
+                    <input type="radio" class="input-radio-from" name="curr-from" curr-id="USD">
+                    <span class="curr-desc">USD</span>
+                </label>
+
+                <label class="curr-label-from">
+                    <input type="radio" class="input-radio-from" name="curr-from" curr-id="EUR">
+                    <span class="curr-desc">EUR</span>
+                </label>
+            </div>
+
+            <div class="select-to">
+                <label class="curr-label-to">
+                    <input type="radio" class="input-radio-to" name="curr-to" curr-id="RUR">
+                    <span class="curr-desc">RUR</span>
+                </label>
+
+                <label class="curr-label-to">
+                    <input type="radio" class="input-radio-to" name="curr-to" curr-id="USD" checked>
+                    <span class="curr-desc">USD</span>
+                </label>
+
+                <label class="curr-label-to">
+                    <input type="radio" class="input-radio-to" name="curr-to" curr-id="EUR">
+                    <span class="curr-desc">EUR</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="input-wrapper">
+
+            <label class="input-from-label">
+                <input type="text" class="input-from" placeholder="отдаю" curr-id="RUR">
+                <span class="input-from-currency-desc">RUR</span>
+
+            </label>
+            <label class="input-to-label">
+                <input type="text" class="input-to" placeholder="получаю" curr-id="AUD">
+                <span class="input-to-currency-desc">AUD</span>
+            </label>
+
+        </div>
+
+
+
+
+    </main>
+    <footer class="fake-footer">
+    </footer>
+
+    <div class="popup-wrapper">
+        <div class="overlay active"></div>
+    </div>
+
+    <script src="//www.cbr-xml-daily.ru/daily_jsonp.js" async></script>
+    <script type="module" src="js/script.js"></script>
+    <!-- <script src="js/swiped-events.min.js"></script> -->
+</body>
+
+
+</html>
