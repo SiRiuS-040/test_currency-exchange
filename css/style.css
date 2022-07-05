@@ -1417,7 +1417,9 @@ input:checked + .header-menu__slider.dark-theme:before {
 
 @media (min-width: 768px) {
   .page-main {
+    display: block;
     margin-top: 100px;
+    margin: 0 auto;
   }
 }
 
@@ -1462,6 +1464,9 @@ input:checked + .header-menu__slider.dark-theme:before {
 @media (min-width: 768px) {
   .converter__calculator {
     margin-top: 0;
+    padding: 0;
+    border-top: 1px solid transparent;
+    max-width: 700px;
   }
 }
 

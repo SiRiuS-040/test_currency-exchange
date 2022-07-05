@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
+    @media (min-width: $tablet-width) {
+        // display: block;
+    }
 }
 
 .converter__calculator {
@@ -14,6 +18,10 @@
 
     @media (min-width: $tablet-width) {
         margin-top: 0;
+
+        padding: 0;
+        border-top: 1px solid transparent;
+        max-width: 700px;
     }
 }
 
