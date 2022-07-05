@@ -4,17 +4,36 @@
     justify-content: space-around;
 }
 
+.converter__calculator {
+    border-top: 1px solid var(--gray-600);
+
+    // margin-bottom: 24px;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    // margin-top: 24px;
+
+    @media (min-width: $tablet-width) {
+        margin-top: 0;
+    }
+}
+
 .converter__wrapper {
-    display: grid;
-    grid-template-columns: 1fr 120px 1fr;
-    align-items: center;
-    height: min-content;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @media (min-width: $tablet-width) {
+        display: grid;
+        grid-template-columns: 1fr 120px 1fr;
+        align-items: center;
+        height: min-content;
+    }
 }
 
 .converter__title {
     font-size: 18px;
     line-height: 24px;
-    font-weight: 5400;
+    font-weight: 400;
     margin-bottom: 8px;
 }
 

@@ -1,10 +1,14 @@
 .page-body {
     display: grid;
     grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
 
     justify-content: space-between;
-    // width: 100%;
+    width: 100%;
     min-height: 100vh;
+
+    @media (min-width: $tablet-width) {
+    }
 }
 
 .page-header {
@@ -19,16 +23,25 @@
 }
 
 .page-header__title {
-    font-size: 26px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 400;
+
+    @media (min-width: $tablet-width) {
+        font-size: 26px;
+        line-height: 30px;
+        font-weight: 400;
+    }
 }
 
 .page-main {
     padding: 20px;
     // height: 100%;
     display: flex;
-    margin-top: 100px;
+
+    @media (min-width: $tablet-width) {
+        margin-top: 100px;
+    }
 }
 
 .page-footer {
