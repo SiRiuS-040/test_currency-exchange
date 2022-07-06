@@ -1559,8 +1559,8 @@ input:checked + .header-menu__slider.dark-theme:before {
 @media (min-width: 768px) {
   .converter__update-time,
   .converter__region-title {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 12px;
+    line-height: 16px;
   }
 }
 
