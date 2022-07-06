@@ -1,9 +1,9 @@
 import { countryData } from './data.js';
 
 const currencyListURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
-var currencyListJSON = {};
 
-let result = await fetch(currencyListURL)
+var currencyListJSON = {};
+let result = await fetch('https://www.cbr-xml-daily.ru/daily_json.js')
     .then((response) => {
         // console.log(response);
         return response.text();
@@ -24,6 +24,8 @@ for (let data in currDataList) {
     ItemData = value;
     currValutes.push(data);
 }
+
+
 
 const firstApi = document.querySelector('.cbrf-api');
 const currListArr = firstApi.querySelectorAll('.currencies__list');
@@ -46,7 +48,14 @@ const buttonCurrSwapArr = firstApi.querySelectorAll('.converter__button-swap');
 let currenciesSwitchItems = firstApi.querySelectorAll('.currency-switch');
 
 
-let generateCyrrList = (valute) => {
+// установка времени обновления курса
+
+const currUpdateTime = firstApi.querySelector('.converter__update-time');
+currUpdateTime.textContent = `Дата обновления курсов ${currData.Date}`;
+
+// console.log(currData);
+
+let generateCurrList = (valute) => {
     currListArr.forEach(list => {
         let currItem = document.createElement('li');
         currItem.className = "currencies__item";
@@ -67,8 +76,10 @@ let generateCyrrList = (valute) => {
 };
 
 currValutes.forEach(valute => {
-    generateCyrrList(valute)
+    generateCurrList(valute)
 });
+
+inputFrom.value = 1;
 
 let calculateExchange = () => {
     var exRate;
@@ -82,23 +93,23 @@ let calculateExchange = () => {
         if (inputToId == 'RUR') {
             if (inputFromId == 'RUR' && inputToId == 'RUR') {
                 exRate = 1;
-                nominalRate = 1;
+                // nominalRate = 1;
             } else if (inputToId != 'RUR') {
                 exRateTo = currData.Valute[inputFromId].Value;
                 exRate = 1 / exRateTo;
-                nominalRate = 1;
+                // nominalRate = 1;
             } else {
                 exRateTo = currData.Valute[inputFromId].Value;
-                nominalRate = 1;
+                // nominalRate = 1;
                 exRate = exRateTo;
             }
         } else if (inputFromId != 'RUR') {
             exRate = 1 / currData.Valute[inputToId].Value;
-            nominalRate = currData.Valute[inputToId].Nominal;
+            // nominalRate = currData.Valute[inputToId].Nominal;
             nominalRate = 1;
         } else {
             exRate = 1 / currData.Valute[inputToId].Value;
-            nominalRate = currData.Valute[inputToId].Nominal;
+            // nominalRate = currData.Valute[inputToId].Nominal;
         }
         if (inputFromId != 'RUR' && inputToId != 'RUR') {
             exRateFrom = currData.Valute[inputFromId].Value;
@@ -107,26 +118,42 @@ let calculateExchange = () => {
         }
         if (inputFromId == inputToId) {
             exRate = 1;
-            nominalRate = 1;
+            // nominalRate = 1;
         }
     }
 
     getExRate();
 
-    inputFrom.value = Number(nominalRate);
+    if (inputFrom.value.length == 0) {
+        inputFrom.value = 1;
+
+    }
+
+    // inputFrom.value = Number(nominalRate);
     inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
     inputFromDesc.textContent = inputFromId;
     inputToDesc.textContent = inputToId;
     inputFromValueDesc.textContent = String(`1 ${inputFromId} = ${exRate.toFixed(3)} ${inputToId}`);
     inputToValueDesc.textContent = String(`1 ${inputToId} = ${(1 / exRate).toFixed(3)} ${inputFromId}`);
+
     inputFrom.addEventListener('input', function () {
         inputFrom.value = (inputFrom.value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, "."));
         inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
+
+        if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
+            inputFrom.value = '';
+            inputTo.value = '';
+        }
     })
 
     inputTo.addEventListener('input', function () {
         inputTo.value = (inputTo.value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, "."));
         inputFrom.value = Number(inputTo.value * exRate).toFixed(3);
+
+        if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
+            inputFrom.value = '';
+            inputTo.value = '';
+        }
     })
 }
 
@@ -251,36 +278,56 @@ buttonCurrSwapArr.forEach(swap => {
 
 // установка базовой валюты от языка браузера
 
-let browserMainLang = navigator.languages[0].match(/[^\s-]+-?/g);
-let mainLang = browserMainLang[1];
-let startCurr = countryData.Country[mainLang].Valute;
+let regionTitle = firstApi.querySelector('.converter__region-title');
 
-const setBasicCurrency = () => {
-    let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
-    currenciesSwitchItems.forEach(item => {
-        if (item.getAttribute('currency-id') == startCurr) {
-            item.click();
-        }
-    });
+if (navigator.languages) {
+    let browserMainLang = navigator.languages[0].match(/[^\s-]+-?/g);
 
-    if (startCurr != "RUR" || startCurr != "EUR" || startCurr != "USD") {
-        let fromCurrencyItems = sectionFrom.querySelectorAll('.currencies__item');
-        fromCurrencyItems.forEach(item => {
-            // console.log(item.getAttribute('currency-id'));
+    let mainLang;
+    if (browserMainLang.length > 1) {
+        mainLang = browserMainLang[1];
+    } else {
+        mainLang = String(browserMainLang).toUpperCase();
+    }
+
+    let startCurr = countryData.Country[mainLang].Valute;
+    regionTitle.textContent = `Регион по браузеру: ${mainLang}`;
+
+    const setBasicCurrency = () => {
+        let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
+        currenciesSwitchItems.forEach(item => {
             if (item.getAttribute('currency-id') == startCurr) {
-                fromCurrencyItems.forEach(item => {
-                    item.onclick = () => {
-                        // button.classList.remove('active');
-                        setCurrency(item);
-                    };
-                });
                 item.click();
-                fromCurrencyItems.forEach(item => {
-                    item.onclick = "";
-                });
             }
         });
+        if (startCurr != "RUR" || startCurr != "EUR" || startCurr != "USD") {
+            let fromCurrencyItems = sectionFrom.querySelectorAll('.currencies__item');
+            fromCurrencyItems.forEach(item => {
+                if (item.getAttribute('currency-id') == startCurr) {
+                    fromCurrencyItems.forEach(item => {
+                        item.onclick = () => {
+                            setCurrency(item);
+                        };
+                    });
+                    item.click();
+                    fromCurrencyItems.forEach(item => {
+                        item.onclick = "";
+                    });
+                }
+            });
+        }
     }
+    setBasicCurrency();
+
+} else {
+    regionTitle.textContent = 'Регион не определен';
+
+    const setBasicCurrency = () => {
+        let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
+        currenciesSwitchItems[0].click();
+    }
+    setBasicCurrency();
 }
 
-setBasicCurrency();
+
+
