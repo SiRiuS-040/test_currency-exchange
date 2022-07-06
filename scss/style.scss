@@ -1,10 +1,7 @@
 // глобальные
 @import "./global/_variables.scss";
-// @import "./global/_global.scss";
 @import "./global/_components.scss";
 
-
-@import "./blocks/_header.scss";
-
+@import "./blocks/_header-footer.scss";
 @import "./blocks/_converter.scss";
 @import "./blocks/_overlay.scss";

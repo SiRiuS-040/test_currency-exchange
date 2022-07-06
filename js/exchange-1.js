@@ -1,32 +1,20 @@
 import { countryData } from './data.js';
 
-// import { setSummaryValue } from './checkboxes.js';
-
-
-
-const currencyRatesURL = 'https://www.cbr-xml-daily.ru/latest.js';
-
-var currencyRatesJSON = {};
-var currRateReq = new XMLHttpRequest();
-currRateReq.open('GET', currencyRatesURL, false);
-currRateReq.send();
-if (currRateReq.status != 200) {
-    alert(currRateReq.status + ': ' + currRateReq.statusText);
-} else {
-    currencyRatesJSON = currRateReq.responseText;
-}
-
 const currencyListURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
 
 var currencyListJSON = {};
-var currListReq = new XMLHttpRequest();
-currListReq.open('GET', currencyListURL, false);
-currListReq.send();
-if (currListReq.status != 200) {
-    alert(currListReq.status + ': ' + currListReq.statusText);
-} else {
-    currencyListJSON = currListReq.responseText;
-}
+
+let result = await fetch(currencyListURL)
+    .then((response) => {
+        // console.log(response);
+        return response.text();
+    })
+    .then((data) => {
+        return data;
+    });
+
+
+currencyListJSON = result;
 
 let currData = JSON.parse(currencyListJSON);
 let currDataList = currData.Valute;
@@ -39,18 +27,14 @@ for (let data in currDataList) {
     currValutes.push(data);
 }
 
-
-
-
-
 const firstApi = document.querySelector('.cbrf-api');
 
 const currListArr = firstApi.querySelectorAll('.currencies__list');
 const sectionFrom = firstApi.querySelector('.converter__currency--from');
 const sectionTo = firstApi.querySelector('.converter__currency--to');
 const overlay = document.querySelector('.overlay');
-const currencySelectButton = firstApi.querySelector('.currency-switch__button--show-all');
-const currencySelectButtonArr = firstApi.querySelectorAll('.currency-switch__button--show-all');
+const currencySelectButton = firstApi.querySelector('.switch-action__button--show-all');
+const currencySelectButtonArr = firstApi.querySelectorAll('.switch-action__button--show-all');
 const currencySelectList = firstApi.querySelector('.currencies__list');
 const currencySelectListArr = firstApi.querySelectorAll('.currencies__list');
 let parentCurrencyItems = firstApi.querySelectorAll('.currencies__item');
