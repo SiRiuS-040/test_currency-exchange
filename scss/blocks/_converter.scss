@@ -9,12 +9,13 @@
 }
 
 .converter__calculator {
-    border-top: 1px solid var(--gray-600);
+    // border-top: 1px solid var(--gray-600);
 
     // margin-bottom: 24px;
     padding-bottom: 24px;
     padding-top: 24px;
     // margin-top: 24px;
+    width: 100%;
 
     @media (min-width: $tablet-width) {
         margin-top: 0;
@@ -213,12 +214,17 @@
 
 .currency__input {
     border: none;
-    font-size: 36px;
-    line-height: 40px;
+    font-size: 32px;
+    line-height: 36px;
     font-weight: 500;
     color: black;
 
     width: 100%;
+
+    @media (min-width: $tablet-width) {
+        font-size: 36px;
+        line-height: 40px;
+    }
 
     &:focus-within {
         border: none;
@@ -234,9 +240,15 @@
 .currency__description {
     margin-top: 8px;
 
-    font-size: 26px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 24px;
     font-weight: 500;
+
+    @media (min-width: $tablet-width) {
+        font-size: 26px;
+        line-height: 30px;
+        // font-weight: 500;
+    }
 }
 
 .currency__exchange-value {

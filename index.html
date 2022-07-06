@@ -16,12 +16,15 @@
 <body class="page-body">
 
     <header class="page-header">
-        <h1 class="page-header__title">Курсы обмена валют ЦБРФ и не только</h1>
+        <div class="page-header__wrapper">
+            <h1 class="page-header__title">Курсы обмена валют ЦБРФ</h1>
+        </div>
+
     </header>
 
     <main class="page-main converter">
-        <div class="converter__calculator cbrf-api">
-            <h2 class="converter__title">https://www.cbr-xml-daily.ru/</h2>
+        <section class="converter__calculator cbrf-api">
+            <!-- <h2 class="converter__title">https://www.cbr-xml-daily.ru/</h2> -->
             <section class="converter__wrapper">
                 <div class="converter__currency converter__currency--from currencies">
                     <h2 class="converter__title"> Ваша валюта </h2>
@@ -100,99 +103,17 @@
                 </div>
 
             </section>
-        </div>
-
-        <div class="converter__calculator rbk-api">
-            <h2 class="converter__title">РБК</h2>
-            <section class="converter__wrapper">
-                <div class="converter__currency converter__currency--from currencies">
-                    <h2 class="converter__title"> Ваша валюта </h2>
-                    <div class="currencies__switch-list-wrapper">
-                        <ul class="currencies__switch-list">
-                            <li class="currencies__switch-item currency-switch currency-switch--rur active"
-                                currency-id="RUR">
-                                <p class="currency-switch__char">RUR</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--usd" currency-id="USD">
-                                <p class="currency-switch__char">USD</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--eur" currency-id="EUR">
-                                <p class="currency-switch__char">EUR</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--new-selected"
-                                currency-id="KRW">
-                                <p class="currency-switch__char">KRW</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch-button">
-                                <button class="currency-switch__button currency-switch__button--show-all"></button>
-                            </li>
-                        </ul>
-                        <ul class="currencies__list hidden">
-                        </ul>
-                    </div>
-                    <div class="converter__input-wrapper">
-                        <label class="converter__currency-label currency">
-                            <input type="text" name="" class="currency__input currency__input--from" curr-id="RUR"
-                                maxlength="14">
-                            <span class="currency__description currency__description--from">Валюта</span>
-                            <span class="currency__exchange-value currency__exchange-value--from">1 RUR = 0.0186
-                                USD</span>
-                        </label>
-
-                    </div>
-                </div>
-                <div class="converter__control">
-                    <button class="converter__button-swap"></button>
-                </div>
-                <div class="converter__currency converter__currency--to currencies">
-                    <h2 class="converter__title">Меняем на валюту</h2>
-                    <div class="currencies__switch-list-wrapper">
-                        <ul class="currencies__switch-list">
-                            <li class="currencies__switch-item currency-switch currency-switch--rur" currency-id="RUR">
-                                <p class="currency-switch__char">RUR</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--usd active"
-                                currency-id="USD">
-                                <p class="currency-switch__char">USD</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--eur" currency-id="EUR">
-                                <p class="currency-switch__char">EUR</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--new-selected"
-                                currency-id="KRW">
-                                <p class="currency-switch__char">KRW</p>
-                            </li>
-                            <li class="currencies__switch-item currency-switch-button">
-                                <button class="currency-switch__button currency-switch__button--show-all"></button>
-                            </li>
-                        </ul>
-                        <ul class="currencies__list hidden">
-                        </ul>
-                    </div>
-                    <div class="converter__input-wrapper">
-                        <label class="converter__currency-label currency">
-                            <input type="text" name="" class="currency__input currency__input--to" curr-id="USD"
-                                maxlength="14">
-                            <span class="currency__description currency__description--to">Валюта</span>
-                            <span class="currency__exchange-value currency__exchange-value--to">1 RUR = 0.0186
-                                USD</span>
-                        </label>
-
-                    </div>
-                </div>
-
-            </section>
-        </div>
+        </section>
 
 
     </main>
 
     <footer class="page-footer">
         <div class="footer-wrapper">
-            <a href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
-            <a href="https://www.cbr-xml-daily.ru/">API для курсов ЦБ РФ</a>
-            <a href="https://www.cbr-xml-daily.ru/">Виджет курсов валют</a>
-            <a href="https://www.cbr-xml-daily.ru/">Курсы ЦБ РФ в XML и JSON, API</a>
+            <a class="page-footer__link" href="https://www.cbr-xml-daily.ru/">Курсы валют, API</a>
+            <a class="page-footer__link" href="https://www.cbr-xml-daily.ru/">API для курсов ЦБ РФ</a>
+            <a class="page-footer__link" href="https://www.cbr-xml-daily.ru/">Виджет курсов валют</a>
+            <a class="page-footer__link" href="https://www.cbr-xml-daily.ru/">Курсы ЦБ РФ в XML и JSON, API</a>
         </div>
     </footer>
 

@@ -306,23 +306,3 @@ const setBasicCurrency = () => {
 
 setBasicCurrency();
 
-// buttonCurrSwap.addEventListener('click', function () {
-//     let swapBufferFrom = inputFrom.getAttribute('curr-id');
-//     let swapBufferTo = inputTo.getAttribute('curr-id');
-//     inputFrom.setAttribute('curr-id', swapBufferTo);
-//     inputTo.setAttribute('curr-id', swapBufferFrom);
-//     swapSwitchCurr();
-//     calculateExchange();
-// });
-
-
-
-// import cors from 'cors';
-// const server = express();
-// server.use(cors());
-
-// generateCyrrList();
-
-// let currencyFrom = 'USD';
-// let currencyTo = 'RUR';
-// let summ = 1000;
