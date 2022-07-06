@@ -1,7 +1,6 @@
 import { countryData } from './data.js';
 
 const currencyListURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
-
 var currencyListJSON = {};
 
 let result = await fetch(currencyListURL)
@@ -12,7 +11,6 @@ let result = await fetch(currencyListURL)
     .then((data) => {
         return data;
     });
-
 
 currencyListJSON = result;
 
@@ -28,14 +26,11 @@ for (let data in currDataList) {
 }
 
 const firstApi = document.querySelector('.cbrf-api');
-
 const currListArr = firstApi.querySelectorAll('.currencies__list');
 const sectionFrom = firstApi.querySelector('.converter__currency--from');
 const sectionTo = firstApi.querySelector('.converter__currency--to');
 const overlay = document.querySelector('.overlay');
-const currencySelectButton = firstApi.querySelector('.switch-action__button--show-all');
 const currencySelectButtonArr = firstApi.querySelectorAll('.switch-action__button--show-all');
-const currencySelectList = firstApi.querySelector('.currencies__list');
 const currencySelectListArr = firstApi.querySelectorAll('.currencies__list');
 let parentCurrencyItems = firstApi.querySelectorAll('.currencies__item');
 
@@ -47,15 +42,8 @@ const inputFromValueDesc = firstApi.querySelector('.currency__exchange-value--fr
 const inputTo = firstApi.querySelector('.currency__input--to');
 const inputToDesc = firstApi.querySelector('.currency__description--to');
 const inputToValueDesc = firstApi.querySelector('.currency__exchange-value--to');
-const buttonCurrSwap = firstApi.querySelector('.converter__button-swap');
 const buttonCurrSwapArr = firstApi.querySelectorAll('.converter__button-swap');
-
 let currenciesSwitchItems = firstApi.querySelectorAll('.currency-switch');
-
-
-
-
-
 
 
 let generateCyrrList = (valute) => {
@@ -131,7 +119,6 @@ let calculateExchange = () => {
     inputToDesc.textContent = inputToId;
     inputFromValueDesc.textContent = String(`1 ${inputFromId} = ${exRate.toFixed(3)} ${inputToId}`);
     inputToValueDesc.textContent = String(`1 ${inputToId} = ${(1 / exRate).toFixed(3)} ${inputFromId}`);
-
     inputFrom.addEventListener('input', function () {
         inputFrom.value = (inputFrom.value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, "."));
         inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
@@ -144,8 +131,6 @@ let calculateExchange = () => {
 }
 
 calculateExchange();
-
-
 
 let setCurrency = (item) => {
     let parent = item.closest('.converter__currency');
@@ -264,17 +249,11 @@ buttonCurrSwapArr.forEach(swap => {
     });
 });
 
-
-// установка базовой валюты
+// установка базовой валюты от языка браузера
 
 let browserMainLang = navigator.languages[0].match(/[^\s-]+-?/g);
 let mainLang = browserMainLang[1];
 let startCurr = countryData.Country[mainLang].Valute;
-
-// startCurr = 'DKK';
-
-
-// console.log(startCurr);
 
 const setBasicCurrency = () => {
     let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
@@ -305,22 +284,3 @@ const setBasicCurrency = () => {
 }
 
 setBasicCurrency();
-
-// buttonCurrSwap.addEventListener('click', function () {
-//     let swapBufferFrom = inputFrom.getAttribute('curr-id');
-//     let swapBufferTo = inputTo.getAttribute('curr-id');
-//     inputFrom.setAttribute('curr-id', swapBufferTo);
-//     inputTo.setAttribute('curr-id', swapBufferFrom);
-//     swapSwitchCurr();
-//     calculateExchange();
-// });
-
-
-
-// generateCyrrList();
-
-// let currencyFrom = 'USD';
-// let currencyTo = 'RUR';
-// let summ = 1000;
-
-// const currencyListURL = 'https://cash.rbc.ru/cash/json/converter_currency_rate/?currency_from=USD&currency_to=EUR&source=cbrf&sum=5000&date=';
