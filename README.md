@@ -1,6 +1,4 @@
 # test_currency-exchange
-
-# test_currency-exchange
 Тестовое задание 
 Использован пропроцессор SCSS
 
