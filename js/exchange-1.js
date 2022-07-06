@@ -27,6 +27,7 @@ if (currListReq.status != 200) {
 } else {
     currencyListJSON = currListReq.responseText;
 }
+
 let currData = JSON.parse(currencyListJSON);
 let currDataList = currData.Valute;
 let currValutes = [];

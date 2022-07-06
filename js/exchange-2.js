@@ -317,10 +317,12 @@ setBasicCurrency();
 
 
 
+// import cors from 'cors';
+// const server = express();
+// server.use(cors());
+
 // generateCyrrList();
 
 // let currencyFrom = 'USD';
 // let currencyTo = 'RUR';
 // let summ = 1000;
-
-// const currencyListURL = 'https://cash.rbc.ru/cash/json/converter_currency_rate/?currency_from=USD&currency_to=EUR&source=cbrf&sum=5000&date=';
