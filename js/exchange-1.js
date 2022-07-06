@@ -124,13 +124,20 @@ let calculateExchange = () => {
 
     getExRate();
 
+
+
     if (inputFrom.value.length == 0) {
         inputFrom.value = 1;
-
     }
 
+
     // inputFrom.value = Number(nominalRate);
+
+    inputFrom.value = inputFrom.value.replace(/\s/g, '');
     inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
+    inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+    inputTo.value = String(inputTo.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+
     inputFromDesc.textContent = inputFromId;
     inputToDesc.textContent = inputToId;
     inputFromValueDesc.textContent = String(`1 ${inputFromId} = ${exRate.toFixed(3)} ${inputToId}`);
@@ -139,6 +146,8 @@ let calculateExchange = () => {
     inputFrom.addEventListener('input', function () {
         inputFrom.value = (inputFrom.value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, "."));
         inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
+        inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+        inputTo.value = String(inputTo.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 
         if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
             inputFrom.value = '';
@@ -149,6 +158,8 @@ let calculateExchange = () => {
     inputTo.addEventListener('input', function () {
         inputTo.value = (inputTo.value.replace(',', '.').replace(/[^\d\.]/g, "").replace(/\./, "x").replace(/\./g, "").replace(/x/, "."));
         inputFrom.value = Number(inputTo.value * exRate).toFixed(3);
+        inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+        inputTo.value = String(inputTo.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 
         if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
             inputFrom.value = '';
