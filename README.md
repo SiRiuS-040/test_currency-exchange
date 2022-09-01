@@ -1,5 +1,7 @@
 # test_currency-exchange
 
+https://sirius-040.github.io/test_currency-exchange/
+
 Тестовое задание 
 Использован пропроцессор SCSS
 
