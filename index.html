@@ -23,28 +23,26 @@
     </header>
 
     <main class="page-main converter">
-      
+
         <section class="converter__calculator cbrf-api">
             <h2 class="converter__region-title">Регион</h2>
             <h2 class="converter__update-time">Время обновления курсов</h2>
             <section class="converter__wrapper">
                 <div class="converter__currency converter__currency--from currencies">
-            
+
                     <h2 class="converter__title"> Ваша валюта </h2>
-                        <div class="currencies__switch-list-wrapper">
+                    <div class="currencies__switch-list-wrapper">
                         <ul class="currencies__switch-list">
-                            <li class="currencies__switch-item currency-switch currency-switch--rur active" currency-id="RUR">
+                            <li class="currencies__switch-item currency-switch currency-switch--rur active" data-currency="RUR">
                                 <p class="currency-switch__char">RUR</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--usd" currency-id="USD">
+                            <li class="currencies__switch-item currency-switch currency-switch--usd" data-currency="USD">
                                 <p class="currency-switch__char">USD</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--eur"
-                                currency-id="EUR">
+                            <li class="currencies__switch-item currency-switch currency-switch--eur" data-currency="EUR">
                                 <p class="currency-switch__char">EUR</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--new-selected"
-                                currency-id="KRW">
+                            <li class="currencies__switch-item currency-switch currency-switch--new-selected" data-currency="KRW">
                                 <p class="currency-switch__char">KRW</p>
                             </li>
                             <li class="currencies__switch-item switch-action">
@@ -56,8 +54,7 @@
                     </div>
                     <div class="converter__input-wrapper">
                         <label class="converter__currency-label currency">
-                            <input type="tel" name="" class="currency__input currency__input--from" curr-id="RUR"
-                                maxlength="14">
+                            <input type="tel" name="currency-input" class="currency__input currency__input--from" data-curr-input="RUR" maxlength="14">
                             <span class="currency__description currency__description--from">Валюта</span>
                             <span class="currency__exchange-value currency__exchange-value--from">1 RUR = 0.0186
                                 USD</span>
@@ -72,18 +69,16 @@
                     <h2 class="converter__title">Меняем на валюту</h2>
                     <div class="currencies__switch-list-wrapper">
                         <ul class="currencies__switch-list">
-                            <li class="currencies__switch-item currency-switch currency-switch--rur" currency-id="RUR">
+                            <li class="currencies__switch-item currency-switch currency-switch--rur" data-currency="RUR">
                                 <p class="currency-switch__char">RUR</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--usd active"
-                                currency-id="USD">
+                            <li class="currencies__switch-item currency-switch currency-switch--usd active" data-currency="USD">
                                 <p class="currency-switch__char">USD</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--eur" currency-id="EUR">
+                            <li class="currencies__switch-item currency-switch currency-switch--eur" data-currency="EUR">
                                 <p class="currency-switch__char">EUR</p>
                             </li>
-                            <li class="currencies__switch-item currency-switch currency-switch--new-selected"
-                                currency-id="KRW">
+                            <li class="currencies__switch-item currency-switch currency-switch--new-selected" data-currency="KRW">
                                 <p class="currency-switch__char">KRW</p>
                             </li>
                             <li class="currencies__switch-item switch-action">
@@ -95,8 +90,7 @@
                     </div>
                     <div class="converter__input-wrapper">
                         <label class="converter__currency-label currency">
-                            <input type="tel" name="" class="currency__input currency__input--to" curr-id="USD"
-                                maxlength="14">
+                            <input type="tel" name="currency-input" class="currency__input currency__input--to" data-curr-input="USD" maxlength="14">
                             <span class="currency__description currency__description--to">Валюта</span>
                             <span class="currency__exchange-value currency__exchange-value--to">1 RUR = 0.0186
                                 USD</span>

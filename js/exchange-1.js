@@ -60,7 +60,7 @@ let generateCurrList = (valute) => {
         let currItem = document.createElement('li');
         currItem.className = "currencies__item";
         currItem.classList.add('currency-item');
-        currItem.setAttribute('currency-id', String(`${currDataList[valute]["CharCode"]}`))
+        currItem.setAttribute('data-currency', String(`${currDataList[valute]["CharCode"]}`))
         list.append(currItem);
 
         let currItemName = document.createElement('p');
@@ -86,8 +86,8 @@ let calculateExchange = () => {
     var exRateFrom;
     var exRateTo;
     var nominalRate;
-    let inputFromId = inputFrom.getAttribute('curr-id');
-    let inputToId = inputTo.getAttribute('curr-id');
+    let inputFromId = inputFrom.getAttribute('data-curr-input');
+    let inputToId = inputTo.getAttribute('data-curr-input');
 
     const getExRate = () => {
         if (inputToId == 'RUR') {
@@ -149,6 +149,21 @@ let calculateExchange = () => {
         inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
         inputTo.value = String(inputTo.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
 
+
+
+        let checkDecimal = inputTo.value.split('.')[1].split('');
+        // console.log(typeof checkDecimal[2]);
+        for (let i = checkDecimal.length - 1; i >= 0; i--) {
+            // console.log(checkDecimal[i]);
+            if (checkDecimal[i] == '0') {
+                console.log('удаляем ноль');
+                checkDecimal.splice(-1, 1)
+            } else {
+
+            }
+        }
+        console.log(checkDecimal);
+
         if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
             inputFrom.value = '';
             inputTo.value = '';
@@ -175,15 +190,15 @@ let setCurrency = (item) => {
     let parentList = parent.querySelector('.currencies__list');
     let parentInput = parent.querySelector('.currency__input');
     let parentItemsArr = parent.querySelectorAll('.currency-switch');
-    let itemId = item.getAttribute('currency-id');
+    let itemId = item.getAttribute('data-currency');
     let switchCurrencyItem = parent.querySelector('.currency-switch--new-selected');
     let switchCurrencyDesc = switchCurrencyItem.querySelector('.currency-switch__char');
 
     if (itemId == "RUR" || itemId == "USD" || itemId == "EUR") {
     } else {
-        switchCurrencyItem.setAttribute('currency-id', itemId)
+        switchCurrencyItem.setAttribute('data-currency', itemId)
         switchCurrencyDesc.textContent = itemId;
-        parentInput.setAttribute('curr-id', itemId)
+        parentInput.setAttribute('data-curr-input', itemId)
         parentItemsArr.forEach(item => {
             item.classList.remove('active');
         });
@@ -202,8 +217,8 @@ let switchCurrency = (item) => {
     parentSwitchItems.forEach(switchItem => {
         switchItem.classList.remove('active');
     });
-    let itemId = item.getAttribute('currency-id');
-    parentInput.setAttribute('curr-id', itemId)
+    let itemId = item.getAttribute('data-currency');
+    parentInput.setAttribute('data-curr-input', itemId)
     calculateExchange();
     item.classList.add('active');
 };
@@ -265,10 +280,10 @@ const swapSwitchCurr = () => {
         }
     }
     if (switchFromIndex == 3 || switchToIndex == 3) {
-        let swapIdFrom = switchItemsFromArr[3].getAttribute('currency-id');
-        let swapIdTo = switchItemsToArr[3].getAttribute('currency-id');
-        switchItemsToArr[3].setAttribute('currency-id', swapIdFrom);
-        switchItemsFromArr[3].setAttribute('currency-id', swapIdTo);
+        let swapIdFrom = switchItemsFromArr[3].getAttribute('data-currency');
+        let swapIdTo = switchItemsToArr[3].getAttribute('data-currency');
+        switchItemsToArr[3].setAttribute('data-currency', swapIdFrom);
+        switchItemsFromArr[3].setAttribute('data-currency', swapIdTo);
         switchCurrCharArrFrom[3].textContent = swapIdTo;
         switchCurrCharArrTo[3].textContent = swapIdFrom;
     }
@@ -278,10 +293,10 @@ const swapSwitchCurr = () => {
 
 buttonCurrSwapArr.forEach(swap => {
     swap.addEventListener('click', function () {
-        let swapBufferFrom = inputFrom.getAttribute('curr-id');
-        let swapBufferTo = inputTo.getAttribute('curr-id');
-        inputFrom.setAttribute('curr-id', swapBufferTo);
-        inputTo.setAttribute('curr-id', swapBufferFrom);
+        let swapBufferFrom = inputFrom.getAttribute('data-curr-input');
+        let swapBufferTo = inputTo.getAttribute('data-curr-input');
+        inputFrom.setAttribute('data-curr-input', swapBufferTo);
+        inputTo.setAttribute('data-curr-input', swapBufferFrom);
         swapSwitchCurr();
         calculateExchange();
     });
@@ -307,14 +322,14 @@ if (navigator.languages) {
     const setBasicCurrency = () => {
         let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
         currenciesSwitchItems.forEach(item => {
-            if (item.getAttribute('currency-id') == startCurr) {
+            if (item.getAttribute('data-currency') == startCurr) {
                 item.click();
             }
         });
         if (startCurr != "RUR" || startCurr != "EUR" || startCurr != "USD") {
             let fromCurrencyItems = sectionFrom.querySelectorAll('.currencies__item');
             fromCurrencyItems.forEach(item => {
-                if (item.getAttribute('currency-id') == startCurr) {
+                if (item.getAttribute('data-currency') == startCurr) {
                     fromCurrencyItems.forEach(item => {
                         item.onclick = () => {
                             setCurrency(item);
