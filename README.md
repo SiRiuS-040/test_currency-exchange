@@ -3,7 +3,6 @@
 https://sirius-040.github.io/test_currency-exchange/
 
 Тестовое задание 
-Использован пропроцессор SCSS
 
 API - https://www.cbr-xml-daily.ru/
 
