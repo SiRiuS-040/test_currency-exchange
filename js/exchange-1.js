@@ -5,7 +5,6 @@ const currencyListURL = 'https://www.cbr-xml-daily.ru/daily_json.js';
 var currencyListJSON = {};
 let result = await fetch('https://www.cbr-xml-daily.ru/daily_json.js')
     .then((response) => {
-        // console.log(response);
         return response.text();
     })
     .then((data) => {
@@ -25,8 +24,6 @@ for (let data in currDataList) {
     currValutes.push(data);
 }
 
-
-
 const firstApi = document.querySelector('.cbrf-api');
 const currListArr = firstApi.querySelectorAll('.currencies__list');
 const sectionFrom = firstApi.querySelector('.converter__currency--from');
@@ -37,7 +34,6 @@ const currencySelectListArr = firstApi.querySelectorAll('.currencies__list');
 let parentCurrencyItems = firstApi.querySelectorAll('.currencies__item');
 
 // запуск калькулятора
-const inputArr = firstApi.querySelectorAll('.currency__input');
 const inputFrom = firstApi.querySelector('.currency__input--from');
 const inputFromDesc = firstApi.querySelector('.currency__description--from');
 const inputFromValueDesc = firstApi.querySelector('.currency__exchange-value--from');
@@ -47,13 +43,9 @@ const inputToValueDesc = firstApi.querySelector('.currency__exchange-value--to')
 const buttonCurrSwapArr = firstApi.querySelectorAll('.converter__button-swap');
 let currenciesSwitchItems = firstApi.querySelectorAll('.currency-switch');
 
-
 // установка времени обновления курса
-
 const currUpdateTime = firstApi.querySelector('.converter__update-time');
 currUpdateTime.textContent = `Дата обновления курсов ${currData.Date}`;
-
-// console.log(currData);
 
 let generateCurrList = (valute) => {
     currListArr.forEach(list => {
@@ -93,23 +85,18 @@ let calculateExchange = () => {
         if (inputToId == 'RUR') {
             if (inputFromId == 'RUR' && inputToId == 'RUR') {
                 exRate = 1;
-                // nominalRate = 1;
             } else if (inputToId != 'RUR') {
                 exRateTo = currData.Valute[inputFromId].Value;
                 exRate = 1 / exRateTo;
-                // nominalRate = 1;
             } else {
                 exRateTo = currData.Valute[inputFromId].Value;
-                // nominalRate = 1;
                 exRate = exRateTo;
             }
         } else if (inputFromId != 'RUR') {
             exRate = 1 / currData.Valute[inputToId].Value;
-            // nominalRate = currData.Valute[inputToId].Nominal;
             nominalRate = 1;
         } else {
             exRate = 1 / currData.Valute[inputToId].Value;
-            // nominalRate = currData.Valute[inputToId].Nominal;
         }
         if (inputFromId != 'RUR' && inputToId != 'RUR') {
             exRateFrom = currData.Valute[inputFromId].Value;
@@ -118,21 +105,14 @@ let calculateExchange = () => {
         }
         if (inputFromId == inputToId) {
             exRate = 1;
-            // nominalRate = 1;
         }
     }
 
     getExRate();
 
-
-
     if (inputFrom.value.length == 0) {
         inputFrom.value = 1;
     }
-
-
-    // inputFrom.value = Number(nominalRate);
-
     inputFrom.value = inputFrom.value.replace(/\s/g, '');
     inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
     inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
@@ -148,22 +128,12 @@ let calculateExchange = () => {
         inputTo.value = Number(inputFrom.value * exRate).toFixed(3);
         inputFrom.value = String(inputFrom.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
         inputTo.value = String(inputTo.value).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
-
-
-
         let checkDecimal = inputTo.value.split('.')[1].split('');
-        // console.log(typeof checkDecimal[2]);
         for (let i = checkDecimal.length - 1; i >= 0; i--) {
-            // console.log(checkDecimal[i]);
             if (checkDecimal[i] == '0') {
-                console.log('удаляем ноль');
                 checkDecimal.splice(-1, 1)
-            } else {
-
             }
         }
-        console.log(checkDecimal);
-
         if (inputFrom.value.length == 0 || inputTo.value.length == 0) {
             inputFrom.value = '';
             inputTo.value = '';
@@ -211,7 +181,6 @@ let setCurrency = (item) => {
 
 let switchCurrency = (item) => {
     let parent = item.closest('.converter__currency');
-    let parentList = parent.closest('.currencies__switch-list');
     let parentSwitchItems = parent.querySelectorAll('.currency-switch');
     let parentInput = parent.querySelector('.currency__input');
     parentSwitchItems.forEach(switchItem => {
@@ -246,7 +215,6 @@ currencySelectButtonArr.forEach(button => {
         });
     })
 });
-
 
 overlay.addEventListener('click', function () {
     overlay.classList.remove('active');
@@ -303,12 +271,9 @@ buttonCurrSwapArr.forEach(swap => {
 });
 
 // установка базовой валюты от языка браузера
-
 let regionTitle = firstApi.querySelector('.converter__region-title');
-
 if (navigator.languages) {
     let browserMainLang = navigator.languages[0].match(/[^\s-]+-?/g);
-
     let mainLang;
     if (browserMainLang.length > 1) {
         mainLang = browserMainLang[1];
@@ -318,7 +283,6 @@ if (navigator.languages) {
 
     let startCurr = countryData.Country[mainLang].Valute;
     regionTitle.textContent = `Регион по браузеру: ${mainLang}`;
-
     const setBasicCurrency = () => {
         let currenciesSwitchItems = sectionFrom.querySelectorAll('.currency-switch');
         currenciesSwitchItems.forEach(item => {
@@ -354,6 +318,3 @@ if (navigator.languages) {
     }
     setBasicCurrency();
 }
-
-
-
